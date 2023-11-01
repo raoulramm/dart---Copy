@@ -5,6 +5,34 @@ import 'package:app/tabs/first_tab.dart';
 import 'package:app/tabs/second_tab.dart';
 import 'package:app/tabs/third_tab.dart';
 
+
+class CurvedAppBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100, // Adjust the height as needed
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color.fromARGB(255, 194, 10, 10), Color.fromARGB(255, 36, 2, 2)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Center(
+        child: Text(
+          'M I N I 🎮A M E S',
+          style: TextStyle(
+            fontSize: 28, // Adjust the font size
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
 class HomePage extends StatelessWidget{
   HomePage({Key? key}) : super(key: key);
 
@@ -28,39 +56,22 @@ class HomePage extends StatelessWidget{
       child: const Text('sign out')
     );
   }
-
  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(
-          shadowColor: Colors.red,
-          title: Center(
-            child: Text(
-              'M I N I 🎮A M E S',
-              style: TextStyle(
-                fontSize: 27,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100), // Adjust the height to match the CurvedAppBar
+          child: CurvedAppBar(),
         ),
         body: Column(
           children: [
-
             Expanded(
               child: TabBarView(
                 children: [
-                  // 1st tab
-                  FirstTab(
-                    
-                  ),
-
-                  // 2nd tab
+                  FirstTab(),
                   SecondTab(),
-
-                  // 3rd tab
                   ThirdTab(),
                 ],
               ),
@@ -74,14 +85,14 @@ class HomePage extends StatelessWidget{
                 ),
               ),
               child: TabBar(
-                unselectedLabelColor: Colors.white, // Color for unselected tabs
-                labelColor: Color.fromARGB(255, 204, 9, 9), // Color for selected tab
+                unselectedLabelColor: Colors.white,
+                labelColor: Color.fromARGB(255, 204, 9, 9),
                 indicator: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15),
                   ),
-                  color: Colors.white, // Background color for the selected tab
+                  color: Colors.white,
                 ),
                 tabs: [
                   Tab(

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:app/pages/GamePage/export.dart';
 import 'package:flutter/material.dart';
 
 class FirstTab extends StatelessWidget {
@@ -26,11 +27,11 @@ class FirstTab extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _buildBlock('Tic Tac Toe', 'Classic strategy game where two players take turns marking a 3x3 grid, aiming to get three of their symbols in a row.', 'assets/images/tiktak.jpg'),
-                    _buildBlock('Hangman ', 'Word-guessing game with limited incorrect guesses', 'assets/images/hangman.jpg'),
-                    _buildBlock('Snake', 'Eat, grow, avoid collisions.', 'assets/images/snake.jpg'),
-                    _buildBlock('Rocket Shooting', 'Navigate a rocket, shooting obstacles for points', 'assets/images/shooting.jpg'),
-                    _buildBlock('Tetromino puzzle', 'Arrange falling blocks to complete lines and score points.', 'assets/images/puzzle.jpg'),
+                    _buildBlock('Tic Tac Toe', 'Classic strategy game where two players take turns marking a 3x3 grid, aiming to get three of their symbols in a row.', 'assets/images/tiktak.jpg', context),
+                    _buildBlock('Hangman ', 'Word-guessing game with limited incorrect guesses', 'assets/images/hangman.jpg', context),
+                    _buildBlock('Snake', 'Eat, grow, avoid collisions.', 'assets/images/snake.jpg', context),
+                    _buildBlock('Rocket Shooting', 'Navigate a rocket, shooting obstacles for points', 'assets/images/shooting.jpg', context),
+                    _buildBlock('Tetromino puzzle', 'Arrange falling blocks to complete lines and score points.', 'assets/images/puzzle.jpg', context),
                   ],
                 ),
               ),
@@ -41,7 +42,7 @@ class FirstTab extends StatelessWidget {
     );
   }
 
- Widget _buildBlock(String heading, String paragraph, String backgroundImage) {
+ Widget _buildBlock(String heading, String paragraph, String backgroundImage,BuildContext context) {
   Color paragraphColor;
   if(backgroundImage == 'assets/images/hangman.jpg') {
     paragraphColor = Colors.black;
@@ -87,10 +88,40 @@ class FirstTab extends StatelessWidget {
           SizedBox(height: 10),
           Align(
             alignment: Alignment.bottomRight,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text('Button'),
-            ),
+            child:ElevatedButton(
+  onPressed: () {
+    if (backgroundImage == 'assets/images/hangman.jpg') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HangmanPage()),
+      );
+    } else if (backgroundImage == 'assets/images/tiktak.jpg') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => TicTacToePage()),
+      );
+    }
+else if(backgroundImage == 'assets/images/puzzle.jpg'){
+ Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => TetrominoPage()),
+      );
+}
+else if(backgroundImage == 'assets/images/shooting.jpg'){
+ Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ShootingPage()),
+      );
+}
+else if(backgroundImage == 'assets/images/snake.jpg'){
+ Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SnakeGamePage()),
+      );
+}
+  },
+  child: Text('play'),
+),
           ),
         ],
       ),

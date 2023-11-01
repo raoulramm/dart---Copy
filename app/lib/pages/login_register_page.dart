@@ -29,18 +29,18 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Future<void> createUserWithEmailAndPassword() async{
-    try {
-      await Auth().createUserWithEmailAndPassword(
-        email: _controllerEmail.text, 
+Future<void> createUserWithEmailAndPassword() async{
+  try {
+    await Auth().createUserWithEmailAndPassword(
+      email: _controllerEmail.text, 
       password: _controllerPassword.text,
-      );
-    } on FirebaseAuthException catch (e){
-      setState((){
-        errorMessage = e.message;
-      });
-    }
+    );
+  } on FirebaseAuthException catch (e){
+    setState(() {
+      errorMessage = e.message;
+    });
   }
+}
 
     Widget _title() {
     return Center(
